@@ -14,8 +14,6 @@ export class CartService {
 
   getCartItems(): CatalogItem[] {
     return this.catalogDataService.getCatalogData().filter(catalogItem => {
-      console.log(catalogItem.id);
-
       return this.cartItemIds.includes(catalogItem.id);
     });
   }
@@ -23,7 +21,6 @@ export class CartService {
   addCartItem(catalogItemId) {
     this.cartItemIds.push(catalogItemId);
     this.setCartItemsToLocalStorage(this.cartItemIds);
-    return this.cartItemIds;
   }
 
   removeCartItem(catalogItemId) {
@@ -32,6 +29,10 @@ export class CartService {
     });
 
     this.setCartItemsToLocalStorage(this.cartItemIds);
+  }
+
+  getCartTotalPrice() {
+    return this.getCartItems().reduce((result, cartItem) => result += cartItem.price, 0);
   }
 
   isCatalogItemInCart(catalogItemId) {

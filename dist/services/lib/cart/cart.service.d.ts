@@ -5,8 +5,9 @@ export declare class CartService {
     constructor(catalogDataService: CatalogDataService);
     cartItemIds: any;
     getCartItems(): CatalogItem[];
-    addCartItem(catalogItemId: any): any;
+    addCartItem(catalogItemId: any): void;
     removeCartItem(catalogItemId: any): void;
+    getCartTotalPrice(): number;
     isCatalogItemInCart(catalogItemId: any): any;
     private getCartItemsFromLocalStorage();
     private setCartItemsToLocalStorage(items);
