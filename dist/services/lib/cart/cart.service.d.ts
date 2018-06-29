@@ -7,6 +7,7 @@ export declare class CartService {
     getCartItems(): CatalogItem[];
     addCartItem(catalogItemId: any): any;
     removeCartItem(catalogItemId: any): void;
+    isCatalogItemInCart(catalogItemId: any): any;
     private getCartItemsFromLocalStorage();
     private setCartItemsToLocalStorage(items);
 }

@@ -34,6 +34,10 @@ export class CartService {
     this.setCartItemsToLocalStorage(this.cartItemIds);
   }
 
+  isCatalogItemInCart(catalogItemId) {
+    return this.cartItemIds.some(item => item === catalogItemId);
+  }
+
   private getCartItemsFromLocalStorage(): number[] {
     return JSON.parse(localStorage.getItem(cartLocalStorageKey));
   }
