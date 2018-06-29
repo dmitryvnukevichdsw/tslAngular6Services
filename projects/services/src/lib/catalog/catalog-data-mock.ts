@@ -12,7 +12,7 @@ export const catalogData = [
     description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat'
   },
   {
-    id: 2,
+    id: 3,
     name: 'Super shoes',
     price: 59.99,
     description: `Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.

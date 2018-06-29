@@ -1,6 +1,44 @@
 import { Injectable } from '@angular/core';
+import {CatalogDataService} from '../catalog/catalog-data.service';
+import {CatalogItem} from '../catalog/CatalogItem';
+
+const cartLocalStorageKey = 'cartItemIds';
 
 @Injectable()
 export class CartService {
-  constructor() { }
+  constructor(private catalogDataService: CatalogDataService) {
+    this.cartItemIds = this.getCartItemsFromLocalStorage() || [];
+  }
+
+  cartItemIds;
+
+  getCartItems(): CatalogItem[] {
+    return this.catalogDataService.getCatalogData().filter(catalogItem => {
+      console.log(catalogItem.id);
+
+      return this.cartItemIds.includes(catalogItem.id);
+    });
+  }
+
+  addCartItem(catalogItemId) {
+    this.cartItemIds.push(catalogItemId);
+    this.setCartItemsToLocalStorage(this.cartItemIds);
+    return this.cartItemIds;
+  }
+
+  removeCartItem(catalogItemId) {
+    this.cartItemIds = this.cartItemIds.filter(cartItemId => {
+      return cartItemId !== catalogItemId;
+    });
+
+    this.setCartItemsToLocalStorage(this.cartItemIds);
+  }
+
+  private getCartItemsFromLocalStorage(): number[] {
+    return JSON.parse(localStorage.getItem(cartLocalStorageKey));
+  }
+
+  private setCartItemsToLocalStorage(items) {
+    localStorage.setItem(cartLocalStorageKey, JSON.stringify(items));
+  }
 }
